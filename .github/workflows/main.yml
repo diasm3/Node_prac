@@ -33,7 +33,7 @@ jobs:
           host: ${{ secrets.DIASM_HOST }}
           username: ${{ secrets.DIASM_USERNAME }}
           password: ${{ secrets.DIASM_PASSWORD }}
-          port: 1500
+          port: '1500'
           #port: ${{ secrets.DIASM_PORT }}
           script: |
             cd ${{ secrets.DIASM_WEB_PATH }} && git pull
