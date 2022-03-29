@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: executing remote ssh commands using password
         if: github.event_name == 'pull_request'
-        uses: appleboy/ssh-action
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DIASM_HOST }}
           username: ${{ secrets.DIASM_USERNAME }}
