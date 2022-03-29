@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.DIASM_PASSWORD }}
           port: ${{secrets.DIASM_PORT }}
           script: |
-            cs ${{ secrets.DIASM_WEB_PATH }} && git pull
+            cd ${{ secrets.DIASM_WEB_PATH }} && git pull
             npm install
             npm run build
 
