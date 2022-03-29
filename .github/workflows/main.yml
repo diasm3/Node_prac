@@ -33,7 +33,7 @@ jobs:
           host: ${{ secrets.DIASM_HOST }}
           username: ${{ secrets.DIASM_USERNAME }}
           password: ${{ secrets.DIASM_PASSWORD }}
-          port: ${{secrets.PORT }}
+          #port: ${{secrets.PORT }}
           script: |
             cs ${{ secrets.DIASM_WEB_PATH }} && git pull
             npm install
