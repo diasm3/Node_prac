@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: executing remote ssh commands using password
-        if: githube.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         uses: diasm3/ssh-action@master
         with:
           host: ${{ secrets.DIASM_HOST }}
