@@ -1,1 +1,31 @@
-<h1>dashboard</h1>
+<h6>dashboard</h6>
+<h5>{{firstName}}</h5>
+<h3>diasm stories</h3>
+{{#if stories}}
+  <table class="striped">
+    <thead>
+      <tr>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>작성일</td>
+        <td>조회수</td>
+        <td>상태</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each stories}}
+        <tr>
+          <td><a href="/stories/test"></a>{{title}}</td>
+          <td>작성자<td>
+          <td>{{createAt}}</td>
+          <td>1</td>
+          <td><span class="dash-status">{{status}}</span></td>
+        </tr>
+      {{/each}}
+    </tbody>
+
+  </table>
+
+{{else}}
+  <p>You have not created any Stories</p>
+{{/if}}
