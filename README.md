@@ -235,34 +235,34 @@ stories.js
 // @middleware  { ensureAuth }
 router.post("/")
 
-
 // @desc  Show add page
 // @route GET /stories/add
 // @middleware  { ensureAuth }
 router.get("/add")
-
 
 // @desc  Show all stories
 // @route GET /stories
 // @middleware  { ensureAuth }
 router.get("/")
 
-
-// @desc  Showing before Edit stories
-// @route GET /stories/edit/:id
+// @desc  Show  single story
+// @route GET /stories/:id
 // @middleware  { ensureAuth }
-router.get("/edit/:id")
-
+router.get("/:id")
 
 // @desc  Editing one story 
 // @route PUT /stories/:id
 // @middleware  { ensureAuth }
 router.put("/:id")
 
+// @desc  Showing before Edit stories
+// @route GET /stories/edit/:id
+// @middleware  { ensureAuth }
+router.get("/edit/:id")
 
 // @desc Delete story
 // @route DELETE /stories/delete/:id
-router.delete('/:id')
+router.delete('/delete/:id')
 ```
 
 
