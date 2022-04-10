@@ -16,6 +16,8 @@ router.post("/", ensureAuth, async (req, res) => {
     res.render("error/500")
   }
 })
+
+
 // @desc  Show add page
 // @route GET /stories/add
 router.get("/add", ensureAuth, (req, res) => {
@@ -79,5 +81,19 @@ router.put("/:id", ensureAuth, async (req, res) => {
   res.redirect("/dashboard")
     }
 })
+
+
+// @desc Delete story
+// @route DELETE /stories/delete/:id
+router.delete('/:id', ensureAuth, async (req, res) =>{
+  try {
+    await Story.remove({ _id: req.params.id})
+    res.redirect('/dashboard')
+  } catch (err){
+    console.error(err)
+    res.render("error/500")
+  }
+})
+
 
 module.exports = router
