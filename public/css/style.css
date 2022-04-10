@@ -15,3 +15,7 @@ p {
   float: left;
   margin-right: 10px;
 }
+
+td{
+  padding-left: 10px;
+}

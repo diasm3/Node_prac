@@ -16,6 +16,8 @@ router.post("/", ensureAuth, async (req, res) => {
     res.render("error/500")
   }
 })
+
+
 // @desc  Show add page
 // @route GET /stories/add
 router.get("/add", ensureAuth, (req, res) => {
