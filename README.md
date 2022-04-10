@@ -4,6 +4,144 @@ MVC + google Auth + Materialize + Express + MongoDB
 form https://youtu.be/SBvmnHTQIPY
 
 
+## Learning from this clone project
+* MVC(Model, View, Controller) understand
+    - Model : data initialize, data structure
+    - View : html, css, js
+    - Controller : routing, data processing, data validation
+
+* How to use google auth
+    - Register google dev console
+    - Add google auth to project
+    - Get the google auth token
+    - Use the token to access the google api
+    - Use passport library for google auth
+    ```javascript
+    // Passport config
+    require("./config/passport")(passport)
+
+    // Passport middleware
+    app.use(passport.initialize())
+    app.use(passport.session())
+
+    ```
+- How to use Materialize([Site link](hhttps://materializecss.com))
+    * Materialize is 
+
+
+
+- How to use Mongodb
+    * Mongodb is a NoSQL database
+    * Use JSON data to store data
+    ```javascript
+    const mongoose = require("mongoose")
+
+    const connectDB = async () => {
+    try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, { 
+        useUnifiedTopology: true
+    })
+
+    console.log(`MongoDb Connected : ${conn.connection.host}`)
+} catch (err) {
+    console.error(err)
+    process.exit(1)
+    }
+}
+
+    ```
+
+
+  
+
+
+- How to use hbs(Express view engine for handlebar.js)
+    * hbs is a template engine 
+    * Simple to use
+    * How to setup
+    ```javascript
+    app.engine(
+    ".hbs",
+    engine({ defaultLayout: "main", extname: ".hbs" })
+    )
+    app.set("view engine", ".hbs")
+    ```
+    * How to use hbs in the view
+    ```javascript
+    // @desc Dashboard
+    // @route Get /dashboard
+    router.get("/dashboard", ensureAuth, async (req, res) => {
+    try {
+        const stories = await Story.find({ user: req.user.id }).lean()
+        res.render("dashboard", {
+        name: req.user.fisrtName, // this data go to the view
+        stories,
+        })
+    } catch (err) {
+        console.err(err)
+        res.render("error/500")
+    }
+    })
+
+    ```
+
+
+    ```html
+    dashboard.hbs
+    <h6>dashboard</h6>
+    <h5>{{firstName}} STORY</h5> // get data from router
+    {{#if stories}}
+    <table class="striped">
+    ......
+    ```
+
+* How to use express 
+    - app.use is used to use middleware
+    - app.router is used to use router
+    - Don't forget app.use is head of the router
+    ```javascript
+    //app.js
+    const express = require("express")
+    const app = express()
+
+    app.use("/") // head of the router
+    app.use("/user", require("../routes/user.js")) // Easy to understand for head of router 
+
+    
+    // ./routes/user.js
+    const express = require("express)
+    const router = express.Router()
+    // @desc    User steve route
+    // @route   /user/steve  ****API endpoint****
+    router.get("steve") // DO NOT PUT / in the route
+    ```
+
+* How to use middleware in router
+    ```javascript
+
+
+
+    ```
+
+
+
+## Todo list 
+* [ ] docker compose 
+* [ ] mongodb docker connect to the other node docker 
+* [ ] git action auto deploy
+* [ ] aws 
+* [ ] maybe react vite to use docker coompose
+* [ ] do myself again at least one time without docker
+----------
+
+
+* API contructure more 
+  * [ ] comment write
+  * [ ] comment edit 
+  * [ ] comment delete 
+----------
+
+
 
 ## API
 
