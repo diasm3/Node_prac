@@ -23,8 +23,13 @@ router.get("/add", (req, res) => {
     res.render("login", {
         name : "hello",
         passs : "암호"
-
     })
+})
+
+router.get("/params/:id", (req,res) => {
+    console.log(req.params.id)
+    // res.send(req.params.id)
+    res.send(`good ${req.params.id}`)
 })
 
 module.exports = router

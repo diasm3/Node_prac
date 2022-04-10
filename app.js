@@ -2,6 +2,7 @@ const path = require("path")
 const express = require("express")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
+const methodOverride = require("method-override")
 const mongoose = require("mongoose")
 const connectDB = require("./config/db")
 const passport = require("passport")
@@ -19,17 +20,16 @@ connectDB()
 const app = express()
 app.use(morgan("dev"))
 
-// Body parser
-app.use(express.json())
+// Body parser app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Handlebars Helpers
-const { formatDate } = require("./helpers/hbs")
+const { formatDate, stripTags, truncate, editIcon, select } = require("./helpers/hbs")
 
 // Handlebars
 app.engine(
   ".hbs",
-  engine({ helpers: { formatDate }, defaultLayout: "main", extname: ".hbs" })
+  engine({ helpers: { formatDate, stripTags, truncate, editIcon, select }, defaultLayout: "main", extname: ".hbs" })
 )
 app.set("view engine", ".hbs")
 
@@ -46,6 +46,23 @@ app.use(
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Set global var
+app.use(function (req, res, next)  {
+    res.locals.user = req.user || null
+    next()
+})
+
+
+app.use(methodOverride(function (req, res){ 
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      let method = req.body._method
+      delete req.body._method
+      return method
+    }
+}))
+
+
 
 // Static folder
 app.use(express.static(path.join(__dirname, "public")))
