@@ -2,12 +2,19 @@ const path = require('path')
 const express = require('express');
 const dotenv = require("dotenv")
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 const connectDB = require('./config/db')
+const passport = require('passport')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const { engine }= require('express-handlebars')
 
 
 // Load config
 dotenv.config({path: './config/config.env'})
+// Passport config
+require('./config/passport')(passport)
+
 
 connectDB()
 
@@ -23,6 +30,21 @@ if (process.env.NODE_ENV === 'development') {
 app.engine('.hbs', engine({ defaultLayout: 'main', extname : '.hbs'}))
 app.set('view engine', '.hbs')
 
+// Sessions
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl : process.env.MONGO_URI})
+}))
+
+
+
+// Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -30,10 +52,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 //Routes
 app.use('/', require('./routes/index'))
-app.use((res,req, next) => {
-    console.log(`Request url : `, req.originalUrl, "-", new Date())
-    next() 
-})
+app.use('/auth', require('./routes/auth'))
+
+
+
+// app.use((res,req, next) => {
+//     console.log(`Request url : `, req.originalUrl, "-", new Date())
+//     next() 
+// })
 
 
 
