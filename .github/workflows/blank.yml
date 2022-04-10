@@ -36,7 +36,6 @@ jobs:
           port: ${{secrets.PORT }}
           script: |
             cs ${{ secrets.DIASM_WEB_PATH }} && git pull
-            npm install
-            npm run build
+            node app.js
 
       # Runs a set of commands using the runners shell
