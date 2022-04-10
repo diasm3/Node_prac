@@ -26,8 +26,6 @@ form https://youtu.be/SBvmnHTQIPY
 
     ```
 - How to use Materialize([Site link](hhttps://materializecss.com))
-    * Materialize is 
-
 
 
 - How to use Mongodb
@@ -43,16 +41,25 @@ form https://youtu.be/SBvmnHTQIPY
     })
 
     console.log(`MongoDb Connected : ${conn.connection.host}`)
-} catch (err) {
-    console.error(err)
-    process.exit(1)
+    } catch (err) {
+        console.error(err)
+        process.exit(1)
+        }
     }
-}
+    ```
+    * How to use query in mongodb
+    ```javascript
+    // Import Schema
+    const Story = require("../models/Story")
 
+    // Query
+    Story.find({}) // search all data if no condition 
+    Story.findById({}) // search by id
+    Story.create() // create new data
+    Story.remove({}) // remove data
+    Story.findOneAndUpdate({}) // update data
     ```
 
-
-  
 
 
 - How to use hbs(Express view engine for handlebar.js)
@@ -87,7 +94,7 @@ form https://youtu.be/SBvmnHTQIPY
 
 
     ```html
-    dashboard.hbs
+    //dashboard.hbs
     <h6>dashboard</h6>
     <h5>{{firstName}} STORY</h5> // get data from router
     {{#if stories}}
@@ -98,6 +105,40 @@ form https://youtu.be/SBvmnHTQIPY
 * How to use express 
     - app.use is used to use middleware
     - app.router is used to use router
+    - GET, POST, PUT, DELETE, PATCH
+    ```javascript
+    const express = require("express")
+    const router = express.Router()
+
+    // GET 
+    router.get("/list")
+
+    // GET
+    // Can get params from url
+    router.get("/list/:id", (req, res) =>{
+        res.send(req.params.id)
+    })
+
+    // POST
+    // Can get data from the client
+    // req.body is the data from the client
+    router.post("/write", (req, res) => {
+        res.send(req.body)
+    })
+
+    // PUT
+    router.put("/update")
+
+    // PATCH 
+    router.patch("/delete")
+
+    // DELETE
+    router.delete("/delete")
+
+
+    ```
+
+
     - Don't forget app.use is head of the router
     ```javascript
     //app.js
@@ -113,10 +154,13 @@ form https://youtu.be/SBvmnHTQIPY
     const router = express.Router()
     // @desc    User steve route
     // @route   /user/steve  ****API endpoint****
-    router.get("steve") // DO NOT PUT / in the route
+    router.get("/steve") // DO NOT PUT / in the route
     ```
 
 * How to use middleware in router
+    - Middleware is a function that runs in the middle of the router
+    - So, middleware is used to check the user is logged in or not
+
     ```javascript
 
 
@@ -303,13 +347,6 @@ views
  ┣ dashboard.hbs    <-- dashboard page -->
  ┗ login.hbs
 ```
-  
-
-
-
-
-
-
 
 
 ## Installed modules 
