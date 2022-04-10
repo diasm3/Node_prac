@@ -2,10 +2,12 @@
   <div class="row">
     <form action="/stories" class="col s12" method="post">
       <div class="row">
-        <div class="input-field"><input type="text" id="title" name="" title />
+        <div class="input-field">
+          <input type="text" id="title" name="title" />
           <label for="title">Title</label>
         </div>
       </div>
+
       <div class="row"><div class="inpu-field">
           <select name="status" id="status">
             <option value="public" selected>public</option>
@@ -14,9 +16,12 @@
           <label for="status">Status</label>
         </div>
       </div>
-      <div class="row"><div class="input field"><h5>Tell Us Your Story:
-            <textarea name="body" id="body"></textarea>
-          </h5></div></div>
+
+      <div class="row"><div class="input field">
+          <h5>Tell Us Your Story:</h5>
+          <textarea name="body" id="body"></textarea>
+        </div>
+      </div>
 
       <div class="row">
         <input type="submit" value="Save" class="btn" />
