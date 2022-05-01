@@ -54,7 +54,9 @@ app.use(function (req, res, next)  {
 })
 
 
+
 app.use(methodOverride(function (req, res){ 
+    console.log(req.body)
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       let method = req.body._method
       delete req.body._method
